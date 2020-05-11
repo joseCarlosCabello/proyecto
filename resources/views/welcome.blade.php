@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
         <meta charset="utf-8">
@@ -85,9 +86,11 @@
                 </div>
 
                 <div class="links">
-                    <a href="https://laravel.com/docs">Docs</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
+                    @if(\Gate::allows('admi'))
+                        <a href="http://proyecto.test/form_alumno"> Registrar Alumno</a>
+                        <a href="http://proyecto.test/form_clase"> Registrar Clase</a>
+                        <a href="http://proyecto.test/form_maestro">Registrar maestro</a>
+                    @endif
                     <a href="https://blog.laravel.com">Blog</a>
                     <a href="https://nova.laravel.com">Nova</a>
                     <a href="https://forge.laravel.com">Forge</a>

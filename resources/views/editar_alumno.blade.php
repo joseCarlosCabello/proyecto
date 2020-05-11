@@ -1,3 +1,4 @@
+
 @extends('layouts.app')
 
 @section('content')
@@ -9,11 +10,11 @@
 
                 <div class="card-body">
 
-                <form action="{{route('proyecto.store')}}"method="POST">
-                    @csrf
+                <form action="{{route('proyecto.Update_alumno',$alumno)}}"method="POST">
+                    @csrf @method('PATCH')
                         <div class="form-group"> <!-- id -->
                             <label for="ID" class="control-label">id</label>
-                            <input type="int" class="form-control" id="ID" name="id" placeholder="#"value="{{old('id')}}">
+                            <input type="int" class="form-control" id="ID" name="id" placeholder="#"value="{{$alumno->id}}">
                             @if ($errors->has('id'))
                                 <p>{{$errors->first('id')}}</p>
                             @endif
@@ -21,7 +22,7 @@
 
                         <div class="form-group"> <!-- Nombre-->
                             <label for="nombre" class="control-label">nombre: </label>
-                            <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Escriba su nombre completo"value="{{old('nombre')}}">
+                            <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Escriba su nombre completo"value="{{$alumno->nombre}}">
                             @if ($errors->has('nombre'))
                                 <p>{{$errors->first('nombre')}}</p>
                             @endif
@@ -38,7 +39,7 @@
 
                         <div class="form-group"> <!-- horas -->
                             <label for="horas" class="control-label">Horas: </label>
-                            <input type="text" class="form-control" id="horas" name="horas" placeholder="horas"value="{{old('horas')}}">
+                            <input type="text" class="form-control" id="horas" name="horas" placeholder="horas"value="{{$alumno->horas}}">
                         </div>
 
                         <div class="form-group"> <!-- Submit Button -->

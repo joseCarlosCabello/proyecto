@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\clase;
 use Illuminate\Http\Request;
 use App\models\Alumno;
+use App\models\Leccion;
+use App\models\Maestro;
+use Illuminate\Contracts\Validation\Rule;
 
 
 class controlador extends Controller
@@ -40,22 +43,25 @@ class controlador extends Controller
     public function store(Request $request)
     {
         $data=request()->validate([
-            'id'=>'required',
+            'id'=>'required|integer',
             'nombre'=>'required',
             'contraseña'=>'required'
         ],[
             'id.required'=>'el campo id es obligatorio',
+            'id.required'=>'el campo id debe de ser un numero',
             'nombre.required'=>'el campo nombre es obligatorio',
             'contraseña.required'=>'el campo contraseña es obligatorio'
         ]
     );
         $alumno=new Alumno();
         $alumno->id  =  $request->id;                 //= \Auth::id();
-        $alumno->nombre = $request->Nombre;
+        $alumno->nombre = $request->nombre;
+        $alumno->clase_id=1;
+        $alumno->clase_alumno='japones';
         $alumno->contraseña = bcrypt($request->contraseña);
         $alumno->horas = $request->horas;
         $alumno->save();
-        return view('formulario');
+        return redirect()->route('form_alumno');
     }
 
     /**
@@ -77,9 +83,9 @@ class controlador extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Alumno $alumno)
     {
-        //
+        return view('editar_alumno',['alumno'=>$alumno]);
     }
 
     /**
@@ -89,9 +95,39 @@ class controlador extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Alumno $alumno)
     {
-        //
+        return $alumno;
+
+    }
+    public function editar_alumno(Alumno $alumno)
+    {
+        return view('editar_alumno',['alumno'=>$alumno]);
+    }
+    public function update_alumno(Alumno $alumno)
+    {
+        $data=request()->validate([
+            'id'=>'required|integer',
+            'nombre'=>'required',
+            'contraseña'=>'',
+            'horas'=>'required'
+        ]
+        ,[
+            'id.required'=>'el campo id es obligatorio',
+            'id.required'=>'el campo id debe de ser un numero',
+            'nombre.required'=>'el campo nombre es obligatorio',
+            'contraseña.required'=>'el campo contraseña es obligatorio'
+        ]);
+        if($data['contraseña']!=null)
+        {
+            $data['contraseña']=bcrypt($data['contraseña']);
+        }
+        else
+        {
+            unset($data['contraseña']);
+        }
+        $alumno->update($data);
+        return redirect()->route('form_alumno');
     }
 
     /**
@@ -100,9 +136,10 @@ class controlador extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($alumno)
     {
-        //
+        $alumno->delete();
+        return redirect()->route('controlador.index');
     }
 
     /**
@@ -111,27 +148,162 @@ class controlador extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function Clase_store(Request $request)
+/****************lecciones */
+
+public function Leccion_index()
+{
+    $lecciones=Leccion::all(); //se toman todos los alumnos de la tabla alumno
+    $titulo='listado de clases';
+    return view('listado_lecciones',compact('titulo','lecciones'));//retorna la vista y se "retorna" el titulo y los alumnos
+}
+
+public function LEccion_show($id)
+{
+    $leccion=Leccion::findOrFail($id);
+
+    return view('mostrar_leccion',compact('leccion'));
+}
+    public function Leccion_store(Request $request)
     {
         $data=request()->validate([
-            'id_clase'=>'required',
+            'id'=>'required|integer',
             'nombre_clase'=>'required',
-            'profesor_id'=>'required',
+            'profesor_id'=>'required|integer',
             'horario'=>'required'
         ],[
-            'id_clase.required'=>'el campo id es obligatorio',
+            'id.integer'=>'el campo id debe de ser un numero',
+            'id.required'=>'el campo id es obligatorio',
             'nombre_clase.required'=>'el campo nombre es obligatorio',
             'profesor_id.required'=>'el campo profesor es obligatorio',
+            'profesor.integer'=>'el campo id maestro debe de ser un numero',
             'horario.required'=>'el campo horario es obligatorio'
         ]
     );
-        $clase=new Clase();
-        $clase->id_clase = $request->id_clase;
-        $clase->nombre_clase = $request->nombre_clase;
-        $clase->profesor_id = $request->profesor_id;
-        $clase->horario = $request->horario;
-        $clase->save();
-        return view('formulario_clase');
+        $leccion=new Leccion();
+        $leccion->id = $request->id;
+        $leccion->nombre_clase = $request->nombre_clase;
+        $leccion->profesor_id = $request->profesor_id;
+        $leccion->horario = $request->horario;
+        if($leccion->save())
+        {
+            return redirect()->route('form_leccion')->with('msj','datos guardados');
+        }
+        else{
+        return redirect()->route('form_leccion');
+        }
 
+
+    }
+    public function Leccion_editar(Leccion $leccion)
+    {
+        return view('editar_leccion',['leccion'=>$leccion]);
+    }
+   /* public function Leccion_update(Request $request,Leccion $leccion)
+    {
+        $leccion->update([
+            'id'=>request('id'),
+            'nombre_clase'=>request('nombre_clase'),
+            'profesor_id'=>request('profesor_id'),
+            'horario'=>request('horario')
+        ]);
+        return redirect()->route('form_leccion');
+    }*/
+    public function Leccion_update(Leccion $leccion)
+    {
+        $data=request()->validate([
+            'id'=>'required|integer',
+            'nombre_clase'=>'required',
+            'profesor_id'=>'required',
+            'horario'=>'required'
+        ]);
+
+        $leccion->update($data);
+        return redirect()->route('form_leccion');
+    }
+
+    public function Leccion_destroy(Leccion $leccion)
+    {
+        $leccion->delete();
+        return redirect()->route('proyecto.Leccion_index');
+    }
+    //****************
+
+
+    //***********formulario maestro */
+
+
+    public function Maestro_index()
+    {
+        $maestros=Maestro::all(); //se toman todos los alumnos de la tabla alumno
+        $titulo='listado de maestros';
+        return view('listado_maestros',compact('titulo','maestros'));//retorna la vista y se "retorna" el titulo y los alumnos
+    }
+
+    public function Maestro_show($id)
+    {
+        $maestro=Maestro::findOrFail($id);
+
+        return view('mostrar_maestro',compact('maestro'));
+    }
+
+    public function Maestro_store(Request $request)
+    {
+        $data=request()->validate([
+            'id'=>'required|integer',
+            'nombre'=>'required',
+            'horario'=>'required'
+        ],[
+            'id.required'=>'el campo id es obligatorio',
+            'id.required'=>'el campo id debe de ser un numero',
+            'nombre.required'=>'el campo nombre es obligatorio',
+            'horario.required'=>'el campo horario es obligatorio'
+        ]
+    );
+        $maestro=new Maestro();
+        $maestro->id = $request->id;
+        $maestro->nombre = $request->nombre;
+        $maestro->horario = $request->horario;
+        $maestro->horas = $request->horas;
+        $maestro->save();
+        return redirect()->route('form_maestro');
+    }
+   /*
+
+    public function Maestro_update(Request $request,Maestro $maestro)
+    {
+        $maestro->update([
+            'id'=>request('id'),
+            'nombre'=>request('nombre'),
+            'horario'=>request('horario'),
+            'horas'=>request('horas'),
+        ]);
+        return redirect()->route('form_maestro');
+
+    }*/
+    public function Maestro_editar(Maestro $maestro)
+    {
+        return view('editar_maestro',['maestro'=>$maestro]);
+    }
+    public function Maestro_update(Maestro $maestro)
+    {
+        $data=request()->validate([
+            'id'=>'required|integer',
+            'nombre'=>'required',
+            'horario'=>'required'
+        ],[
+            'id.required'=>'el campo id es obligatorio',
+            'id.required'=>'el campo id debe de ser un numero',
+            'nombre.required'=>'el campo nombre es obligatorio',
+            'horario.required'=>'el campo horario es obligatorio'
+        ]
+    );
+
+        $maestro->update($data);
+        return redirect()->route('form_maestro');
+    }
+    public function Maestro_destroy(Maestro $maestro)
+    {
+        $maestro->delete();
+        return redirect()->route('proyecto.Maestro_index');
     }
 }

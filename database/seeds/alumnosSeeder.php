@@ -16,9 +16,9 @@ class alumnosSeeder extends Seeder
     {
        Alumno::create([
             'nombre'=>'andrew',
-            $CA='clase_alumno'=>'japones',
+           // $CA='clase_alumno'=>'japones',
             //'clase_id'=>2,
-            'clase_id'=>Clase::where('nombre_clase','japones')->value('id_clase'),
+            //'clase_id'=>Clase::where('nombre_clase','japones')->value('id_clase'),
             'contraseña'=>bcrypt('andrew78'),
             'horas'=>3,
         ]);

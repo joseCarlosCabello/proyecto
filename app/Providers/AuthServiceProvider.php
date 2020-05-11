@@ -25,6 +25,14 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        //
+        Gate::define('admi',function($user)
+        {
+            if(\Auth::id()==1){
+                return true;
+            }
+            else{
+                return false;
+            }
+        });
     }
 }
