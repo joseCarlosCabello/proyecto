@@ -165,6 +165,8 @@ public function LEccion_show($id)
 }
     public function Leccion_store(Request $request)
     {
+
+
         $data=request()->validate([
             'id'=>'required|integer',
             'nombre_clase'=>'required',
@@ -184,6 +186,12 @@ public function LEccion_show($id)
         $leccion->nombre_clase = $request->nombre_clase;
         $leccion->profesor_id = $request->profesor_id;
         $leccion->horario = $request->horario;
+
+        if($request->hasFile('bandera'))
+        {
+            $leccion->bandera=$request->file('bandera')->store('public');
+        }
+
         if($leccion->save())
         {
             return redirect()->route('form_leccion')->with('msj','datos guardados');
@@ -210,13 +218,14 @@ public function LEccion_show($id)
     }*/
     public function Leccion_update(Leccion $leccion)
     {
+
         $data=request()->validate([
             'id'=>'required|integer',
             'nombre_clase'=>'required',
             'profesor_id'=>'required',
-            'horario'=>'required'
+            'horario'=>'required',
+            'bandera'
         ]);
-
         $leccion->update($data);
         return redirect()->route('form_leccion');
     }

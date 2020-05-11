@@ -9,8 +9,18 @@
 
                 <div class="card-body">
 
-                <form action="{{route('proyecto.Leccion_update',$leccion)}}"method="POST">
+                <form action="{{route('proyecto.Leccion_update',$leccion)}}"
+                enctype="multipart/form-data"
+                method="POST">
                     @csrf @method('PATCH')
+                    <p>
+                    <img src="/storage/{{$leccion->bandera}}" width="100px">
+                </p>
+                </div>
+                    <p><label for="bandera">
+                        <input type="file"name="bandera">
+                    </label>
+                </p>
                         <div class="form-group"> <!-- id -->
                             <label for="id" class="control-label">id</label>
                         <input type="int" class="form-control" id="id" name="id" placeholder="#"value="{{$leccion->id}}">

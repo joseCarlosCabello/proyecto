@@ -18,6 +18,7 @@ class CreateLeccionesTable extends Migration
             $table->string('nombre_clase');
             $table->integer('profesor_id');
             $table->string('horario');
+            $table->string('bandera')->default('default.jpg');
             $table->timestamps();
         });
     }
