@@ -1,25 +1,36 @@
 @extends('layouts.tema2')
-@section('titulo','lecciones')
 
 @section('content')
-    <h1>{{$titulo}}</h1>
-    <ul>
-        @forelse ($lecciones as $leccion)
-            <li>
-                {{$leccion->nombre_clase}},id  {{$leccion->id}}
-            <a href="{{route('proyecto.Leccion_show',$leccion)}}"> Ver detalles</a>
-            <a href="{{route('proyecto.Leccion_editar',$leccion)}}"> Editar</a>
-            <form action="{{route('proyecto.Leccion_destroy',$leccion)}}"method="POST">
-                {{csrf_field()}}
-                {{method_field('DELETE')}}
-                <button type="submit">Eliminar</button>
-            </form>
-            </li>
-        @empty
-            <li>no hay lecciones</li>
-        @endforelse
-    </ul>
+
+<!-- ============================================================== -->
+<!-- striped table -->
+<!-- ============================================================== -->
+<div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
+    <div class="card">
+        <h5 class="card-header">Clases</h5>
+        <div class="card-body">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">id</th>
+                        <th scope="col">Nombre</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach($lecciones as $leccion)
+                    <tr>
+                        <th scope="row">{{$leccion->id}}</th>
+                        <td>{{$leccion->nombre_clase}}</td>
+                        <td><a href="{{ route('proyecto.Leccion_show',$leccion)}}" class="btn btn-outline-info">Detalle</a></td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<!-- ============================================================== -->
+<!-- end striped table -->
+<!-- ============================================================== -->
 @endsection
-@section('name')
-    @parent
-@endsection
+

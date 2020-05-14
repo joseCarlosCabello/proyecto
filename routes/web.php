@@ -43,9 +43,17 @@ Route::PATCH('/actualizar_maestro/{maestro}', 'controlador@Maestro_update')->nam
 /**********eliminar */
 Route::delete('/maestros/{maestro}', 'controlador@Maestro_destroy')->name('proyecto.Maestro_destroy')->middleware("auth");
 Route::delete('/lecciones/{leccion}', 'controlador@Leccion_destroy')->name('proyecto.Leccion_destroy')->middleware("auth");
+Route::delete('/alumno/{alumno}', 'controlador@Alumno_destroy')->name('proyecto.Alumno_destroy')->middleware("auth");
+/**********restaurar */
+Route::get('/maestros/restore/{maestro}', 'controlador@Maestro_restore')->name('proyecto.Maestro_restore')->middleware("auth");
+Route::get('/lecciones/restore/{leccion}', 'controlador@Leccion_restore')->name('proyecto.Leccion_restore')->middleware("auth");
+Route::get('/alumno/restore/{alumno}', 'controlador@restore')->name('proyecto.restore')->middleware("auth");
 
 //**********index */
 Route::get('/maestros','controlador@Maestro_index')->name('proyecto.Maestro_index')->middleware("auth");
+Route::get('/maestros/deleted','controlador@Maestro_index_deleted')->name('proyecto.Maestro_index_deleted')->middleware("auth");
+Route::get('/alumnos/deleted','controlador@index_deleted')->name('proyecto.index_deleted')->middleware("auth");
+Route::get('/lecciones/deleted','controlador@Leccion_index_deleted')->name('proyecto.Leccion_index_deleted')->middleware("auth");
 Route::get('/lecciones','controlador@Leccion_index')->name('proyecto.Leccion_index');
 
 /**********show */

@@ -21,7 +21,7 @@
                     <tr>
                         <th scope="row">{{$alumno->id}}</th>
                         <td>{{$alumno->nombre}}</td>
-                        <td><a href="{{ route('proyecto.show',$alumno)}}" class="btn btn-outline-info">Detalle</a></td>
+                        <td><a href="{{ route('proyecto.restore',$alumno)}}" class="btn btn-outline-info">Restaurar</a></td>
                     </tr>
                     @endforeach
                 </tbody>

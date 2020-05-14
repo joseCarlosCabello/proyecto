@@ -1,25 +1,39 @@
 @extends('layouts.tema2')
-@section('titulo','maestros')
 
 @section('content')
-    <h1>{{$titulo}}</h1>
-    <ul>
-        @forelse ($maestros as $maestro)
-            <li>
-                {{$maestro->nombre}},id  {{$maestro->id}}
-            <a href="{{route('proyecto.Maestro_show',$maestro)}}"> Ver detalles</a>
-            <a href="{{route('proyecto.Maestro_editar',$maestro)}}"> Editar</a>
-            <form action="{{route('proyecto.Maestro_destroy',$maestro)}}"method="POST">
-                {{csrf_field()}}
-                {{method_field('DELETE')}}
-                <button type="submit">Eliminar</button>
-            </form>
-            </li>
-        @empty
-            <li>no hay maestros</li>
-        @endforelse
-    </ul>
-@endsection
-@section('name')
-    @parent
+
+<!-- ============================================================== -->
+<!-- striped table -->
+<!-- ============================================================== -->
+<div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
+    <div class="card">
+        <h5 class="card-header">Maestros</h5>
+        <div class="card-body">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">id</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Horario</th>
+                        <th scope="col">Horas</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach($maestros as $maestro)
+                    <tr>
+                        <th scope="row">{{$maestro->id}}</th>
+                        <td>{{$maestro->nombre}}</td>
+                        <td>{{$maestro->horario}}</td>
+                        <td>{{$maestro->horas}}</td>
+                        <td><a href="{{ route('proyecto.Maestro_show',$maestro)}}" class="btn btn-outline-info">Detalle</a></td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<!-- ============================================================== -->
+<!-- end striped table -->
+<!-- ============================================================== -->
 @endsection

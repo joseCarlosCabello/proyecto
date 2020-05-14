@@ -7,7 +7,7 @@
 <!-- ============================================================== -->
 <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
     <div class="card">
-        <h5 class="card-header">Alumnos</h5>
+        <h5 class="card-header">Maestros</h5>
         <div class="card-body">
             <table class="table table-striped">
                 <thead>
@@ -17,11 +17,11 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($alumnos as $alumno)
+                    @foreach($maestros as $maestro)
                     <tr>
-                        <th scope="row">{{$alumno->id}}</th>
-                        <td>{{$alumno->nombre}}</td>
-                        <td><a href="{{ route('proyecto.show',$alumno)}}" class="btn btn-outline-info">Detalle</a></td>
+                        <th scope="row">{{$maestro->id}}</th>
+                        <td>{{$maestro->nombre}}</td>
+                        <td><a href="{{ route('proyecto.Maestro_restore',$maestro)}}" class="btn btn-outline-info">Restaurar</a></td>
                     </tr>
                     @endforeach
                 </tbody>

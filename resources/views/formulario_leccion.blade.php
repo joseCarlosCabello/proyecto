@@ -14,13 +14,7 @@
                 enctype="multipart/form-data"
                 method="POST">
                     @csrf
-                        <div class="form-group"> <!-- id -->
-                            <label for="id" class="control-label">id</label>
-                            <input type="int" class="form-control" id="id" name="id" placeholder="#"value="{{old('id')}}">
-                            @if ($errors->has('id'))
-                                <p>{{$errors->first('id')}}</p>
-                            @endif
-                        </div>
+
 
                         <div class="form-group"> <!-- nombre_clase  -->
                             <label for="nombre_clase" class="control-label">Nombre clase</label>

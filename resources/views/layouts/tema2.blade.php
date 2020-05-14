@@ -6,7 +6,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Crento de idiomas</title>
+    <title>EstacionaPark</title>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="{{asset('../assets/vendor/bootstrap/css/bootstrap.min.css')}}">
 
@@ -25,7 +25,7 @@
         <!-- ============================================================== -->
          <div class="dashboard-header">
             <nav class="navbar navbar-expand-lg bg-white fixed-top">
-                <a class="navbar-brand" href="../">Centro de idiomas</a>
+                <a class="navbar-brand" href="../index.html">Centro de idiomas</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -46,10 +46,7 @@
                                 </div>
                                 <a class="dropdown-item" href="#"><i class="fas fa-user mr-2"></i>Account</a>
                                 <a class="dropdown-item" href="#"><i class="fas fa-cog mr-2"></i>Setting</a>
-                                @if (Route::has('login'))
-                                    @auth
-                                        <a class="dropdown-item" href="#"><i class="fas fa-power-off mr-2"></i>Logout</a>
-
+                                <a class="dropdown-item" href="#"><i class="fas fa-power-off mr-2"></i>Logout</a>
                             </div>
                         </li>
                     </ul>
@@ -83,11 +80,15 @@
                                             <div id="submenu-2" class="collapse submenu" style="">
                                                 <ul class="nav flex-column">
                                                     <li class="nav-item">
-                                                        <a class="nav-link" href="{{route('form_alumno')}}">Dar de alta a un alumno</a>
+                                                    <a class="nav-link" href="{{route('form_alumno')}}">Dar de alta a un alumno</a>
                                                     </li>
                                                     <li class="nav-item">
-                                                        <a class="nav-link" href="{{route('proyecto.index')}}">Ver alumnos</a>
+                                                    <a class="nav-link" href="{{route('proyecto.index')}}">Ver alumnos</a>
                                                     </li>
+                                                    <li class="nav-item">
+                                                        <a class="nav-link" href="{{route('proyecto.index_deleted')}}">Ver alumnos eliminados</a>
+                                                    </li>
+
                                                 </ul>
                                             </div>
                                         </li>
@@ -96,10 +97,13 @@
                                 <div id="submenu-3" class="collapse submenu" style="">
                                     <ul class="nav flex-column">
                                         <li class="nav-item">
-                                            <a class="nav-link" href="{{route('form_leccion')}}">Dar de alta clase</a>
+                                        <a class="nav-link" href="{{route('form_leccion')}}">Dar de alta clase</a>
                                         </li>
                                         <li class="nav-item">
                                             <a class="nav-link" href="{{route('proyecto.Leccion_index')}}">Ver clases</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="{{route('proyecto.Leccion_index_deleted')}}">Ver clases eliminadas</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -109,11 +113,14 @@
                                 <div id="submenu-4" class="collapse submenu" style="">
                                     <ul class="nav flex-column">
                                         <li class="nav-item">
-                                            <a class="nav-link" href="{{route('form_maestro')}}">Dar de alta a un maestro</a>
+                                        <a class="nav-link" href="{{route('form_maestro')}}">Dar de a un maestro</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="{{route('proyecto.Maestro_index')}}">Ver maestros</a>
+                                        <a class="nav-link" href="{{route('proyecto.Maestro_index')}}">Ver maestros</a>
                                         </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="{{route('proyecto.Maestro_index_deleted')}}">Ver maestros eliminados</a>
+                                            </li>
                                     </ul>
                                 </div>
                             </li>

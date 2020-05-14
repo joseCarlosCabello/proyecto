@@ -80,36 +80,36 @@
                                             <div id="submenu-2" class="collapse submenu" style="">
                                                 <ul class="nav flex-column">
                                                     <li class="nav-item">
-                                                        <a class="nav-link" href="general.html">Dar de alta a un alumno</a>
+                                                    <a class="nav-link" href="{{route('form_alumno')}}">Dar de alta a un alumno</a>
                                                     </li>
                                                     <li class="nav-item">
-                                                        <a class="nav-link" href="general.html">Ver alumnos</a>
+                                                    <a class="nav-link" href="{{route('proyecto.index')}}">Ver alumnos</a>
                                                     </li>
                                                 </ul>
                                             </div>
                                         </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-2" aria-controls="submenu-2"><i class="fa fa-fw fa-rocket"></i>Clases</a>
-                                <div id="submenu-2" class="collapse submenu" style="">
+                                <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-3" aria-controls="submenu-3"><i class="fa fa-fw fa-rocket"></i>Clases</a>
+                                <div id="submenu-3" class="collapse submenu" style="">
                                     <ul class="nav flex-column">
                                         <li class="nav-item">
-                                            <a class="nav-link" href="general.html">Dar de alta clase</a>
+                                        <a class="nav-link" href="{{route('form_leccion')}}">Dar de alta clase</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="general.html">Ver clases</a>
+                                            <a class="nav-link" href="{{route('proyecto.Leccion_index')}}">Ver clases</a>
                                         </li>
                                     </ul>
                                 </div>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-2" aria-controls="submenu-2"><i class="fa fa-fw fa-rocket"></i>Maestros</a>
-                                <div id="submenu-2" class="collapse submenu" style="">
+                                <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-4" aria-controls="submenu-4"><i class="fa fa-fw fa-rocket"></i>Maestros</a>
+                                <div id="submenu-4" class="collapse submenu" style="">
                                     <ul class="nav flex-column">
                                         <li class="nav-item">
-                                            <a class="nav-link" href="general.html">Dar de alta clase</a>
+                                        <a class="nav-link" href="{{route('form_maestro')}}">Dar de a un maestro</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="general.html">Ver clases</a>
+                                        <a class="nav-link" href="{{route('proyecto.Maestro_index')}}">Ver maestros</a>
                                         </li>
                                     </ul>
                                 </div>

@@ -17,7 +17,9 @@ class CreateMaestrosTable extends Migration
             $table->id('id');
             $table->string('nombre');
             $table->string('horario');
+            $table->softDeletes('deleted_at');
             $table->integer('horas');
+
             $table->timestamps();
         });
     }

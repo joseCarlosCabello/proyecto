@@ -24,6 +24,13 @@ class controlador extends Controller
         return view('listado_alumnos',compact('titulo','alumnos'));//retorna la vista y se "retorna" el titulo y los alumnos
     }
 
+    public function index_deleted()
+    {
+        $alumnos=Alumno::onlyTrashed()->get(); //se toman todos los alumnos de la tabla alumno
+        $titulo='listado de alumnos';
+        return view('listado_alumnos_eliminados',compact('titulo','alumnos'));//retorna la vista y se "retorna" el titulo y los alumnos
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -43,23 +50,15 @@ class controlador extends Controller
     public function store(Request $request)
     {
         $data=request()->validate([
-            'id'=>'required|integer',
             'nombre'=>'required',
-            'contraseña'=>'required'
         ],[
-            'id.required'=>'el campo id es obligatorio',
-            'id.required'=>'el campo id debe de ser un numero',
             'nombre.required'=>'el campo nombre es obligatorio',
-            'contraseña.required'=>'el campo contraseña es obligatorio'
+
         ]
     );
         $alumno=new Alumno();
         $alumno->id  =  $request->id;                 //= \Auth::id();
         $alumno->nombre = $request->nombre;
-        $alumno->clase_id=1;
-        $alumno->clase_alumno='japones';
-        $alumno->contraseña = bcrypt($request->contraseña);
-        $alumno->horas = $request->horas;
         $alumno->save();
         return redirect()->route('form_alumno');
     }
@@ -107,14 +106,14 @@ class controlador extends Controller
     public function update_alumno(Alumno $alumno)
     {
         $data=request()->validate([
-            'id'=>'required|integer',
+           // 'id'=>'required|integer',
             'nombre'=>'required',
             'contraseña'=>'',
             'horas'=>'required'
         ]
         ,[
-            'id.required'=>'el campo id es obligatorio',
-            'id.required'=>'el campo id debe de ser un numero',
+           // 'id.required'=>'el campo id es obligatorio',
+           // 'id.required'=>'el campo id debe de ser un numero',
             'nombre.required'=>'el campo nombre es obligatorio',
             'contraseña.required'=>'el campo contraseña es obligatorio'
         ]);
@@ -136,12 +135,24 @@ class controlador extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($alumno)
+    public function destroy(Alumno $alumno)
     {
+        return dd($alumno);
         $alumno->delete();
-        return redirect()->route('controlador.index');
+        return redirect()->route('proyecto.index');
+    }
+    public function restore($id)
+    {
+       $restore = Alumno::withTrashed()->where('id', '=', $id)->first();
+       $restore->restore();
+        return redirect()->route('proyecto.index');
     }
 
+    public function Alumno_destroy(Alumno $alumno)
+    {
+        $alumno->delete();
+        return redirect()->route('proyecto.index');
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -156,6 +167,12 @@ public function Leccion_index()
     $titulo='listado de clases';
     return view('listado_lecciones',compact('titulo','lecciones'));//retorna la vista y se "retorna" el titulo y los alumnos
 }
+public function Leccion_index_deleted()
+{
+    $lecciones=Leccion::onlyTrashed()->get(); //se toman todos los alumnos de la tabla alumno
+    $titulo='listado de lecciones';
+    return view('listado_lecciones_eliminadas',compact('titulo','lecciones'));//retorna la vista y se "retorna" el titulo y los alumnos
+}
 
 public function LEccion_show($id)
 {
@@ -168,13 +185,11 @@ public function LEccion_show($id)
 
 
         $data=request()->validate([
-            'id'=>'required|integer',
             'nombre_clase'=>'required',
             'profesor_id'=>'required|integer',
             'horario'=>'required'
         ],[
-            'id.integer'=>'el campo id debe de ser un numero',
-            'id.required'=>'el campo id es obligatorio',
+
             'nombre_clase.required'=>'el campo nombre es obligatorio',
             'profesor_id.required'=>'el campo profesor es obligatorio',
             'profesor.integer'=>'el campo id maestro debe de ser un numero',
@@ -220,7 +235,6 @@ public function LEccion_show($id)
     {
 
         $data=request()->validate([
-            'id'=>'required|integer',
             'nombre_clase'=>'required',
             'profesor_id'=>'required',
             'horario'=>'required',
@@ -235,6 +249,12 @@ public function LEccion_show($id)
         $leccion->delete();
         return redirect()->route('proyecto.Leccion_index');
     }
+    public function Leccion_restore($id)
+    {
+       $restore = Leccion::withTrashed()->where('id','=', $id)->first();
+       $restore->restore();
+        return redirect()->route('proyecto.Leccion_index');
+    }
     //****************
 
 
@@ -247,6 +267,12 @@ public function LEccion_show($id)
         $titulo='listado de maestros';
         return view('listado_maestros',compact('titulo','maestros'));//retorna la vista y se "retorna" el titulo y los alumnos
     }
+    public function Maestro_index_deleted()
+    {
+        $maestros=Maestro::onlyTrashed()->get(); //se toman todos los alumnos de la tabla alumno
+        $titulo='listado de maestros';
+        return view('listado_maestros_eliminados',compact('titulo','maestros'));//retorna la vista y se "retorna" el titulo y los alumnos
+    }
 
     public function Maestro_show($id)
     {
@@ -258,12 +284,9 @@ public function LEccion_show($id)
     public function Maestro_store(Request $request)
     {
         $data=request()->validate([
-            'id'=>'required|integer',
             'nombre'=>'required',
             'horario'=>'required'
         ],[
-            'id.required'=>'el campo id es obligatorio',
-            'id.required'=>'el campo id debe de ser un numero',
             'nombre.required'=>'el campo nombre es obligatorio',
             'horario.required'=>'el campo horario es obligatorio'
         ]
@@ -296,12 +319,12 @@ public function LEccion_show($id)
     public function Maestro_update(Maestro $maestro)
     {
         $data=request()->validate([
-            'id'=>'required|integer',
+            //'id'=>'required|integer',
             'nombre'=>'required',
             'horario'=>'required'
         ],[
-            'id.required'=>'el campo id es obligatorio',
-            'id.required'=>'el campo id debe de ser un numero',
+           // 'id.required'=>'el campo id es obligatorio',
+            //'id.required'=>'el campo id debe de ser un numero',
             'nombre.required'=>'el campo nombre es obligatorio',
             'horario.required'=>'el campo horario es obligatorio'
         ]
@@ -314,5 +337,11 @@ public function LEccion_show($id)
     {
         $maestro->delete();
         return redirect()->route('proyecto.Maestro_index');
+    }
+    public function Maestro_restore($id)
+    {
+       $restore = Maestro::withTrashed()->where('id', '=', $id)->first();
+       $restore->restore();
+         return redirect()->route('proyecto.Maestro_index');
     }
 }
