@@ -8,4 +8,5 @@ class Leccion extends Model
 {
     protected $fillable = ['id', 'nombre_clase', 'profesor_id','horario','bandera'];
     use softDeletes;
+
 }

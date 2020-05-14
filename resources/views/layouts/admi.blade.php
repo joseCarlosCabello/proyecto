@@ -44,9 +44,7 @@
                                     <h5 class="mb-0 text-white nav-user-name">
                                     <span class="status"></span><span class="ml-2">Available</span>
                                 </div>
-                                <a class="dropdown-item" href="#"><i class="fas fa-user mr-2"></i>Account</a>
-                                <a class="dropdown-item" href="#"><i class="fas fa-cog mr-2"></i>Setting</a>
-                                <a class="dropdown-item" href="#"><i class="fas fa-power-off mr-2"></i>Logout</a>
+                                <a class="dropdown-item" href="{{route('login')}}"><i class="fas fa-sign-in-alt"></i>Login</a>
                             </div>
                         </li>
                     </ul>
@@ -59,6 +57,8 @@
         <!-- ============================================================== -->
         <!-- left sidebar -->
         <!-- ============================================================== -->
+
+
       <div class="nav-left-sidebar sidebar-dark">
             <div class="menu-list">
                 <nav class="navbar navbar-expand-lg navbar-light">
@@ -85,6 +85,10 @@
                                                     <li class="nav-item">
                                                     <a class="nav-link" href="{{route('proyecto.index')}}">Ver alumnos</a>
                                                     </li>
+                                                    <li class="nav-item">
+                                                        <a class="nav-link" href="{{route('proyecto.index_deleted')}}">Ver alumnos eliminados</a>
+                                                    </li>
+
                                                 </ul>
                                             </div>
                                         </li>
@@ -97,6 +101,9 @@
                                         </li>
                                         <li class="nav-item">
                                             <a class="nav-link" href="{{route('proyecto.Leccion_index')}}">Ver clases</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="{{route('proyecto.Leccion_index_deleted')}}">Ver clases eliminadas</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -111,6 +118,9 @@
                                         <li class="nav-item">
                                         <a class="nav-link" href="{{route('proyecto.Maestro_index')}}">Ver maestros</a>
                                         </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="{{route('proyecto.Maestro_index_deleted')}}">Ver maestros eliminados</a>
+                                            </li>
                                     </ul>
                                 </div>
                             </li>

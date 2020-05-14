@@ -1,4 +1,4 @@
-@extends('layouts.tema2')
+@extends('layouts.admi')
 
 @section('content')
 <div class="container">

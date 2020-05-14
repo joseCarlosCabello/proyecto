@@ -1,4 +1,4 @@
-@extends('layouts.tema2')
+@extends('layouts.admi')
 @if(session()->has('msj'))
 <div class="alert alert-success">
     <strong>Datos registrados!</strong>
