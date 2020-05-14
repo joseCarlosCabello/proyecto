@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.tema2')
 
 @section('content')
 <div class="container">
@@ -44,7 +44,8 @@
                              <p>{{$errors->first('horario')}}</p>
                              @endif
                         </div>
-
+                        <div class="col-sm-6 pl-0">
+                            <p class="text-right">
                         <div class="form-group"> <!-- Submit Button -->
                             <button type="submit" class="btn btn-primary">Registrar!</button>
                         </div>

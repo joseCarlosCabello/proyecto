@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.tema2')
 @if(session()->has('msj'))
 <div class="alert alert-success">
     <strong>Datos registrados!</strong>
@@ -6,13 +6,9 @@
 
 @endif
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">crear Clase</div>
-
-                <div class="card-body">
+<div class="card">
+    <h5 class="card-header">Dar de alta leccion</h5>
+    <div class="card-body">
 
                 <form action="{{route('proyecto.Leccion_store')}}"
                 enctype="multipart/form-data"
@@ -49,7 +45,8 @@
                                 <p>{{$errors->first('horario')}}</p>
                             @endif
                         </div>
-
+                        <div class="col-sm-6 pl-0">
+                            <p class="text-right">
                         <div class="form-group"> <!-- Submit Button -->
                             <button type="submit" class="btn btn-primary">Registrar!</button>
                         </div>
@@ -60,3 +57,4 @@
         </div>
     </div>
 </div>
+@endsection

@@ -1,5 +1,4 @@
-<!DOCTYPE html>
-
+@extends('layouts.tema')
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
         <meta charset="utf-8">
@@ -91,11 +90,7 @@
                         <a href="http://proyecto.test/form_clase"> Registrar Clase</a>
                         <a href="http://proyecto.test/form_maestro">Registrar maestro</a>
                     @endif
-                    <a href="https://blog.laravel.com">Blog</a>
-                    <a href="https://nova.laravel.com">Nova</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://vapor.laravel.com">Vapor</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
+                    <a href="https://blog.laravel.com">Ver clases ofertadas</a>
                 </div>
             </div>
         </div>

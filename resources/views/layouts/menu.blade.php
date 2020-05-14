@@ -35,8 +35,8 @@
       <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
         <div class="bg-white py-2 collapse-inner rounded">
           <h6 class="collapse-header">Custom Components:</h6>
-        <a class="collapse-item" href="{{ route('tarea.index') }}">Listado Tareas</a>
-        <a class="collapse-item" href="{{ route('tarea.create') }}">Crear Tarea</a>
+        <a class="collapse-item" href="{{ route('proyecto.Leccion_index') }}">Listado Tareas</a>
+        <a class="collapse-item" href="{{ route('form_leccion') }}">Crear Tarea</a>
         </div>
       </div>
     </li>

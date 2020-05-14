@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.tema2')
 @section('tittle',"Maestro {$maestro->id}")
 @section('content')
     <h1>Maestro#{{$maestro->id}}</h1>

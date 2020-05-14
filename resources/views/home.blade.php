@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.tema2')
 
 @section('content')
 <div class="container">
@@ -14,7 +14,7 @@
                         </div>
                     @endif
 
-                    You are logged in!
+                    Se ha confirmado su direccion de correo C:
                 </div>
             </div>
         </div>

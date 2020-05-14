@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.tema2')
 @section('tittle',"Leccion {$leccion->id}")
 @section('content')
     <h1>Leccion#{{$leccion->id}}</h1>

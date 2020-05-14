@@ -1,13 +1,9 @@
-@extends('layouts.tema')
+@extends('layouts.tema2')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">crear maestro</div>
-
-                <div class="card-body">
+<div class="card">
+    <h5 class="card-header">registrar maestro</h5>
+    <div class="card-body">
 
                 <form action="{{route('proyecto.Maestro_store')}}"method="POST">
                     @csrf
@@ -44,7 +40,8 @@
                              <p>{{$errors->first('horario')}}</p>
                              @endif
                         </div>
-
+                        <div class="col-sm-6 pl-0">
+                            <p class="text-right">
                         <div class="form-group"> <!-- Submit Button -->
                             <button type="submit" class="btn btn-primary">Registrar!</button>
                         </div>
