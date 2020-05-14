@@ -69,3 +69,4 @@ Route::get('/lecciones/{leccion}','controlador@Leccion_show')
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home')->middleware("verified");
+Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');

@@ -45,6 +45,7 @@
                                     <span class="status"></span><span class="ml-2">Available</span>
                                 </div>
                                 <a class="dropdown-item" href="{{route('login')}}"><i class="fas fa-sign-in-alt"></i>Login</a>
+                                <a class="dropdown-item" href="{{route('logout')}}"><i class="fas fa-power-off mr-2"></i>Logout</a>
                             </div>
                         </li>
                     </ul>

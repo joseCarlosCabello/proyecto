@@ -8,6 +8,7 @@ use App\models\Alumno;
 use App\models\Leccion;
 use App\models\Maestro;
 use Illuminate\Contracts\Validation\Rule;
+use Illuminate\Support\Facades\Auth;
 
 
 class controlador extends Controller
@@ -344,4 +345,8 @@ public function LEccion_show($id)
        $restore->restore();
          return redirect()->route('proyecto.Maestro_index');
     }
+    public function logout(Request $request) {
+        Auth::logout();
+        return redirect('/login');
+      }
 }
