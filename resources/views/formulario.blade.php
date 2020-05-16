@@ -6,7 +6,11 @@
     <div class="card-body">
         <form action="{{route('proyecto.store')}}"method="POST">
             @csrf
-
+            @if(session()->has('msj'))
+            <div class="alert alert-success">
+                <strong>Datos registrados!</strong>
+            </div>
+            @endif
 
                 <div class="form-group"> <!-- Nombre-->
                     <label for="nombre" class="control-label">nombre: </label>

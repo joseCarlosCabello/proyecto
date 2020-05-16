@@ -3,6 +3,8 @@
 use App\Http\Controllers\controlador;
 use Illuminate\Auth\Events\Verified;
 use Illuminate\Support\Facades\Route;
+use App\models\Leccion;
+use App\models\Maestro;
 
 Route::get('/', function () {
     return view('welcome');
@@ -18,8 +20,9 @@ Route::resource('proyecto', 'controlador')->middleware("auth");
 
 Route::post('/crear_leccion', 'controlador@Leccion_store')->name('proyecto.Leccion_store')->middleware("auth");
 
-Route::get('/form_leccion',function(){
-    return view("formulario_leccion");
+Route::get('/form_leccion/{leccion?}',function(){
+    $maestros=Maestro::all();
+    return view("formulario_leccion",compact('maestros'));
 })->name('form_leccion')->middleware("auth");
 
 Route::post('/agregar_maestro', 'controlador@Maestro_store')->name('proyecto.Maestro_store');
@@ -51,6 +54,7 @@ Route::get('/alumno/restore/{alumno}', 'controlador@restore')->name('proyecto.re
 
 //**********index */
 Route::get('/maestros','controlador@Maestro_index')->name('proyecto.Maestro_index')->middleware("auth");
+Route::get('/maestros_lecciones/{maestro}','controlador@Maestro_leccion_index')->name('proyecto.Maestro_leccion_index')->middleware("auth");
 Route::get('/maestros/deleted','controlador@Maestro_index_deleted')->name('proyecto.Maestro_index_deleted')->middleware("auth");
 Route::get('/alumnos/deleted','controlador@index_deleted')->name('proyecto.index_deleted')->middleware("auth");
 Route::get('/lecciones/deleted','controlador@Leccion_index_deleted')->name('proyecto.Leccion_index_deleted')->middleware("auth");

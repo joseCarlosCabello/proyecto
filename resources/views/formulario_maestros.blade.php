@@ -7,7 +7,11 @@
 
                 <form action="{{route('proyecto.Maestro_store')}}"method="POST">
                     @csrf
-
+                        @if(session()->has('msj'))
+                        <div class="alert alert-success">
+                            <strong>Datos registrados!</strong>
+                        </div>
+                        @endif
 
                         <div class="form-group"> <!-- nombre-->
                             <label for="nombre" class="control-label">nombre: </label>

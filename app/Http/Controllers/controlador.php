@@ -61,7 +61,13 @@ class controlador extends Controller
         $alumno->id  =  $request->id;                 //= \Auth::id();
         $alumno->nombre = $request->nombre;
         $alumno->save();
-        return redirect()->route('form_alumno');
+        if($alumno->save())
+        {
+            return redirect()->route('form_alumno',$alumno)->with('msj','Datos Guardados');
+        }
+        else{
+             return redirect()->route('form_alumno',$alumno);
+        }
     }
 
     /**
@@ -109,25 +115,22 @@ class controlador extends Controller
         $data=request()->validate([
            // 'id'=>'required|integer',
             'nombre'=>'required',
-            'contraseña'=>'',
-            'horas'=>'required'
         ]
         ,[
            // 'id.required'=>'el campo id es obligatorio',
            // 'id.required'=>'el campo id debe de ser un numero',
             'nombre.required'=>'el campo nombre es obligatorio',
-            'contraseña.required'=>'el campo contraseña es obligatorio'
+
         ]);
-        if($data['contraseña']!=null)
-        {
-            $data['contraseña']=bcrypt($data['contraseña']);
-        }
-        else
-        {
-            unset($data['contraseña']);
-        }
+
         $alumno->update($data);
-        return redirect()->route('form_alumno');
+        if($alumno->save())
+        {
+            return redirect()->route('proyecto.Editar_alumno',$alumno)->with('msj','Datos Actualizados');
+        }
+        else{
+             return redirect()->route('proyecto.Editar_alumno',$alumno);
+        }
     }
 
     /**
@@ -168,6 +171,7 @@ public function Leccion_index()
     $titulo='listado de clases';
     return view('listado_lecciones',compact('titulo','lecciones'));//retorna la vista y se "retorna" el titulo y los alumnos
 }
+
 public function Leccion_index_deleted()
 {
     $lecciones=Leccion::onlyTrashed()->get(); //se toman todos los alumnos de la tabla alumno
@@ -184,15 +188,12 @@ public function LEccion_show($id)
     public function Leccion_store(Request $request)
     {
 
-
         $data=request()->validate([
             'nombre_clase'=>'required',
             'profesor_id'=>'required|integer',
             'horario'=>'required'
         ],[
-
             'nombre_clase.required'=>'el campo nombre es obligatorio',
-            'profesor_id.required'=>'el campo profesor es obligatorio',
             'profesor.integer'=>'el campo id maestro debe de ser un numero',
             'horario.required'=>'el campo horario es obligatorio'
         ]
@@ -200,7 +201,7 @@ public function LEccion_show($id)
         $leccion=new Leccion();
         $leccion->id = $request->id;
         $leccion->nombre_clase = $request->nombre_clase;
-        $leccion->profesor_id = $request->profesor_id;
+        $leccion->maestro_id = $request->profesor_id;
         $leccion->horario = $request->horario;
 
         if($request->hasFile('bandera'))
@@ -242,7 +243,13 @@ public function LEccion_show($id)
             'bandera'
         ]);
         $leccion->update($data);
-        return redirect()->route('form_leccion');
+        if($leccion->save())
+        {
+            return redirect()->route('proyecto.Leccion_editar',$leccion)->with('msj','Datos Actualizados');
+        }
+        else{
+             return redirect()->route('proyecto.Leccion_editar',$leccion);
+        }
     }
 
     public function Leccion_destroy(Leccion $leccion)
@@ -267,6 +274,13 @@ public function LEccion_show($id)
         $maestros=Maestro::all(); //se toman todos los alumnos de la tabla alumno
         $titulo='listado de maestros';
         return view('listado_maestros',compact('titulo','maestros'));//retorna la vista y se "retorna" el titulo y los alumnos
+    }
+    public function Maestro_leccion_index($maestro)
+    {
+        $maestros=Maestro::findOrFail($maestro); //se toman todos los alumnos de la tabla alumno
+        $maestros=$maestros->leccions;
+        $titulo='listado de maestros';
+        return view('maestros_leccion',compact('titulo','maestros'));//retorna la vista y se "retorna" el titulo y los alumnos
     }
     public function Maestro_index_deleted()
     {
@@ -298,7 +312,13 @@ public function LEccion_show($id)
         $maestro->horario = $request->horario;
         $maestro->horas = $request->horas;
         $maestro->save();
-        return redirect()->route('form_maestro');
+        if($maestro->save())
+        {
+            return redirect()->route('form_maestro',$maestro)->with('msj','Datos Actualizados');
+        }
+        else{
+             return redirect()->route('form_maestro',$maestro);
+        }
     }
    /*
 
@@ -332,7 +352,13 @@ public function LEccion_show($id)
     );
 
         $maestro->update($data);
-        return redirect()->route('form_maestro');
+        if($maestro->save())
+        {
+            return redirect()->route('proyecto.Maestro_editar',$maestro)->with('msj','datos Actualizados');
+        }
+        else{
+             return redirect()->route('proyecto.Maestro_editar',$maestro);
+        }
     }
     public function Maestro_destroy(Maestro $maestro)
     {
@@ -345,8 +371,5 @@ public function LEccion_show($id)
        $restore->restore();
          return redirect()->route('proyecto.Maestro_index');
     }
-    public function logout(Request $request) {
-        Auth::logout();
-        return redirect('/login');
-      }
+
 }

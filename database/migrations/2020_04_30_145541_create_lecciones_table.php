@@ -15,12 +15,17 @@ class CreateLeccionesTable extends Migration
     {
         Schema::create('leccions', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('maestro_id')->unsigned();
             $table->string('nombre_clase');
-            $table->integer('profesor_id');
             $table->string('horario');
             $table->string('bandera')->default('default.jpg');
             $table->softDeletes('deleted_at');
             $table->timestamps();
+
+           // $table->foreign('maestro_id')->references('id')->on('maestros');
+        });
+      Schema::table('leccions', function ($table) {
+            $table->foreign('maestro_id')->references('id')->on('maestros')->onDelete('cascade');
         });
     }
 
@@ -33,4 +38,5 @@ class CreateLeccionesTable extends Migration
     {
         Schema::dropIfExists('leccions');
     }
+
 }

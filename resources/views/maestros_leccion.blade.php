@@ -5,6 +5,7 @@
 <!-- ============================================================== -->
 <!-- striped table -->
 <!-- ============================================================== -->
+
 <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
     <div class="card">
         <h5 class="card-header">Maestros</h5>
@@ -19,14 +20,13 @@
                     </tr>
                 </thead>
                 <tbody>
+
                     @foreach($maestros as $maestro)
                     <tr>
                         <th scope="row">{{$maestro->id}}</th>
-                        <td>{{$maestro->nombre}}</td>
+                        <td>{{$maestro->nombre_clase}}</td>
                         <td>{{$maestro->horario}}</td>
-                        <td>{{$maestro->horas}}</td>
-                        <td><a href="{{ route('proyecto.Maestro_show',$maestro)}}" class="btn btn-outline-info">Detalle</a></td>
-                        <td><a href="{{ route('proyecto.Maestro_leccion_index',$maestro)}}" class="btn btn-outline-info">Clases</a></td>
+                        <td><a href="{{ route('proyecto.Leccion_show',$maestro)}}" class="btn btn-outline-info">Detalle</a></td>
                     </tr>
                     @endforeach
                 </tbody>

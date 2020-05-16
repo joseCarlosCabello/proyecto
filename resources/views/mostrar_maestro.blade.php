@@ -24,7 +24,7 @@
                         <td>{{$maestro->nombre}}</td>
                         <td>{{$maestro->horario}}</td>
                         <td>{{$maestro->horas}}</td>
-                        <td><a href="{{ route ('proyecto.Editar_alumno',$maestro->id) }}" class="btn btn-outline-primary">Editar</a></td>
+                        <td><a href="{{ route ('proyecto.Maestro_editar',$maestro->id) }}" class="btn btn-outline-primary">Editar</a></td>
                         <td>
                         <form action="{{ route ('proyecto.Maestro_destroy',$maestro->id) }}" method="POST">
                             @csrf

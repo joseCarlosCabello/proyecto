@@ -13,6 +13,11 @@
                 enctype="multipart/form-data"
                 method="POST">
                     @csrf @method('PATCH')
+                    @if(session()->has('msj'))
+                    <div class="alert alert-success">
+                        <strong>Datos Actualizados!</strong>
+                    </div>
+                    @endif
                     <p>
                     <img src="/storage/{{$leccion->bandera}}" width="100px">
                 </p>

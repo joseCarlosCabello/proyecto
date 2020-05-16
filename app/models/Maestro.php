@@ -17,6 +17,11 @@ class Maestro extends Model
     {
       $this->attributes['nombre'] = strtoupper($value);
     }
+    public function leccions()
+    {
+
+        return $this->hasMany(Leccion::class);
+    }
 
 
 }

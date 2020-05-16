@@ -51,13 +51,13 @@
             }
 
             .title {
-                font-size: 84px;
+                font-size: 40px;
             }
 
             .links > a {
-                color: #636b6f;
+                color: #0011ff;
                 padding: 0 25px;
-                font-size: 13px;
+                font-size: 20px;
                 font-weight: 600;
                 letter-spacing: .1rem;
                 text-decoration: none;
@@ -87,16 +87,21 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Laravel
+                    Bienvenido al centro de idiomas
                 </div>
 
                 <div class="links">
                     @if(\Gate::allows('admi'))
-                        <a href="http://proyecto.test/form_alumno"> Registrar Alumno</a>
+                    <a href="http://proyecto.test/form_alumno"> Registrar Alumno</a>
+                    <p>
+
+                    </p>
                         <a href="http://proyecto.test/form_clase"> Registrar Clase</a>
                         <a href="http://proyecto.test/form_maestro">Registrar maestro</a>
+                    @else
+                        <a href="{{route('proyecto.Leccion_index')}}">Ver clases ofertadas</a>
                     @endif
-                    <a href="https://blog.laravel.com">Ver clases ofertadas</a>
+
                 </div>
             </div>
         </div>

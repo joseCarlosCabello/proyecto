@@ -14,7 +14,7 @@ class CreateMaestrosTable extends Migration
     public function up()
     {
         Schema::create('maestros', function (Blueprint $table) {
-            $table->id('id');
+            $table->increments('id');
             $table->string('nombre');
             $table->string('horario');
             $table->softDeletes('deleted_at');

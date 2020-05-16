@@ -38,14 +38,17 @@
                         </li>
 
                         <li class="nav-item dropdown nav-user">
-                            <a class="nav-link nav-user-img" href="#" id="navbarDropdownMenuLink2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="../assets/images/avatar-1.jpg" alt="" class="user-avatar-md rounded-circle"></a>
+                            <a class="nav-link nav-user-img" href="#" id="navbarDropdownMenuLink2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="../assets/images/avatar-default-icon.png" alt="" class="user-avatar-md rounded-circle"></a>
                             <div class="dropdown-menu dropdown-menu-right nav-user-dropdown" aria-labelledby="navbarDropdownMenuLink2">
                                 <div class="nav-user-info">
                                     <h5 class="mb-0 text-white nav-user-name">
-                                    <span class="status"></span><span class="ml-2">Available</span>
+                                    <span class="status"></span><span class="ml-2">Usuario</span>
                                 </div>
+                                @if(\Gate::allows('admi'))
+                                    <a class="dropdown-item" href="{{route('logout')}}"><i class="fas fa-power-off mr-2"></i>Logout</a>
+                                @endif
                                 <a class="dropdown-item" href="{{route('login')}}"><i class="fas fa-sign-in-alt"></i>Login</a>
-                                <a class="dropdown-item" href="{{route('logout')}}"><i class="fas fa-power-off mr-2"></i>Logout</a>
+
                             </div>
                         </li>
                     </ul>
@@ -59,7 +62,7 @@
         <!-- left sidebar -->
         <!-- ============================================================== -->
 
-
+        @if(\Gate::allows('admi'))
       <div class="nav-left-sidebar sidebar-dark">
             <div class="menu-list">
                 <nav class="navbar navbar-expand-lg navbar-light">
@@ -73,6 +76,10 @@
                                 Menu
                             </li>
                             <li class="nav-item ">
+                            <!---- ------------------------------------------------------------->
+                             <!---- ------------------------------------------------------------->
+                              <!---- ------------------------------------------------------------->
+
                                 <a class="nav-link active" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-1" aria-controls="submenu-1"><i class="fa fa-fw fa-user-circle"></i>Admi <span class="badge badge-success">6</span></a>
                                 <div id="submenu-1" class="collapse submenu" style="">
                                     <ul class="nav flex-column">
@@ -114,7 +121,7 @@
                                 <div id="submenu-4" class="collapse submenu" style="">
                                     <ul class="nav flex-column">
                                         <li class="nav-item">
-                                        <a class="nav-link" href="{{route('form_maestro')}}">Dar de a un maestro</a>
+                                        <a class="nav-link" href="{{route('form_maestro')}}">Dar de alta a un maestro</a>
                                         </li>
                                         <li class="nav-item">
                                         <a class="nav-link" href="{{route('proyecto.Maestro_index')}}">Ver maestros</a>
@@ -125,11 +132,15 @@
                                     </ul>
                                 </div>
                             </li>
+
+                             <!---- ------------------------------------------------------------->
+                              <!---- ------------------------------------------------------------->
                         </ul>
                     </div>
                 </nav>
             </div>
         </div>
+        @endif
         <!-- ============================================================== -->
         <!-- end left sidebar -->
         <!-- ============================================================== -->

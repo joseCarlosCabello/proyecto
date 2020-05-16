@@ -11,6 +11,11 @@
 
                 <form action="{{route('proyecto.Maestro_update',$maestro)}}"method="POST">
                     @csrf @method('PATCH')
+                    @if(session()->has('msj'))
+                    <div class="alert alert-success">
+                        <strong>Datos Actualizados!</strong>
+                    </div>
+                    @endif
                         <div class="form-group"> <!-- id -->
                             <label for="id" class="control-label">id</label>
                         <input type="id" class="form-control" id="id" name="id" placeholder="#"value="{{$maestro->id}}">

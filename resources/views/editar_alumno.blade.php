@@ -12,6 +12,11 @@
 
                 <form action="{{route('proyecto.Update_alumno',$alumno)}}"method="POST">
                     @csrf @method('PATCH')
+                    @if(session()->has('msj'))
+                    <div class="alert alert-success">
+                        <strong>Datos Actualizados!</strong>
+                    </div>
+                    @endif
                         <div class="form-group"> <!-- id -->
                             <label for="ID" class="control-label">id</label>
                             <input type="int" class="form-control" id="ID" name="id" placeholder="#"value="{{$alumno->id}}">
@@ -29,18 +34,6 @@
                         </div>
 
 
-                        <div class="form-group"> <!-- contraseña -->
-                            <label for="contraseña" class="control-label">Contraseña: </label>
-                            <input type="password" class="form-control" id="contraseña" name="contraseña" placeholder="contraseña"value="{{old('contraseña')}}">
-                            @if ($errors->has('contraseña'))
-                                <p>{{$errors->first('contraseña')}}</p>
-                            @endif
-                        </div>
-
-                        <div class="form-group"> <!-- horas -->
-                            <label for="horas" class="control-label">Horas: </label>
-                            <input type="text" class="form-control" id="horas" name="horas" placeholder="horas"value="{{$alumno->horas}}">
-                        </div>
 
                         <div class="form-group"> <!-- Submit Button -->
                             <button type="submit" class="btn btn-primary">Registrar!</button>
