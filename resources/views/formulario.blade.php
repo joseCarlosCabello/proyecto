@@ -14,7 +14,7 @@
 
                 <div class="form-group"> <!-- Nombre-->
                     <label for="nombre" class="control-label">nombre: </label>
-                    <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Escriba su nombre completo"value="{{old('nombre')}}">
+                    <input type="text" required class="form-control" id="nombre" name="nombre" placeholder="Escriba su nombre completo"value="{{old('nombre')}}">
                     @if ($errors->has('nombre'))
                         <p>{{$errors->first('nombre')}}</p>
                     @endif

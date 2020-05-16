@@ -19,7 +19,7 @@
 
                         <div class="form-group"> <!-- nombre_clase  -->
                             <label for="nombre_clase" class="control-label">Nombre clase</label>
-                            <input type="text" class="form-control" id="nombre_clase" name="nombre_clase" placeholder="nombre"value="{{old('nombre_clase')}}">
+                            <input type="text" required class="form-control" id="nombre_clase" name="nombre_clase" placeholder="nombre"value="{{old('nombre_clase')}}">
                             @if ($errors->has('nombre_clase'))
                                 <p>{{$errors->first('nombre_clase')}}</p>
                              @endif
@@ -38,7 +38,7 @@
 
                         <div class="form-group"> <!-- horario-->
                             <label for="horario" class="control-label">Horario: </label>
-                            <input type="text" class="form-control" id="horario" name="horario" placeholder="dia"value="{{old('horario')}}">
+                            <input type="text" required class="form-control" id="horario" name="horario" placeholder="dia"value="{{old('horario')}}">
                             @if ($errors->has('horario'))
                                 <p>{{$errors->first('horario')}}</p>
                             @endif

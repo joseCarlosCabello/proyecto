@@ -15,7 +15,7 @@
                         <th scope="col">id</th>
                         <th scope="col">Nombre</th>
                         <th scope="col">Horario</th>
-                        <th scope="col">Horas</th>
+
                     </tr>
                 </thead>
                 <tbody>

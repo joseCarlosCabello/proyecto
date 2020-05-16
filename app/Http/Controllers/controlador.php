@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\models\Alumno;
 use App\models\Leccion;
 use App\models\Maestro;
+use App\Http\Requests\CrearLeccion;
+use App\Http\Requests\CrearMaestro;
 use Illuminate\Contracts\Validation\Rule;
 use Illuminate\Support\Facades\Auth;
 
@@ -185,16 +187,15 @@ public function LEccion_show($id)
 
     return view('mostrar_leccion',compact('leccion'));
 }
-    public function Leccion_store(Request $request)
+    public function Leccion_store(CrearLeccion $request)
     {
 
         $data=request()->validate([
             'nombre_clase'=>'required',
-            'profesor_id'=>'required|integer',
             'horario'=>'required'
         ],[
             'nombre_clase.required'=>'el campo nombre es obligatorio',
-            'profesor.integer'=>'el campo id maestro debe de ser un numero',
+
             'horario.required'=>'el campo horario es obligatorio'
         ]
     );
@@ -207,6 +208,7 @@ public function LEccion_show($id)
         if($request->hasFile('bandera'))
         {
             $leccion->bandera=$request->file('bandera')->store('public');
+
         }
 
         if($leccion->save())
@@ -221,7 +223,8 @@ public function LEccion_show($id)
     }
     public function Leccion_editar(Leccion $leccion)
     {
-        return view('editar_leccion',['leccion'=>$leccion]);
+        $maestros=Maestro::all();
+        return view('edit_leccion',['leccion'=>$leccion],compact('maestros'));
     }
    /* public function Leccion_update(Request $request,Leccion $leccion)
     {
@@ -233,15 +236,15 @@ public function LEccion_show($id)
         ]);
         return redirect()->route('form_leccion');
     }*/
-    public function Leccion_update(Leccion $leccion)
+    public function Leccion_update(Leccion $leccion,Request $request)
     {
 
         $data=request()->validate([
             'nombre_clase'=>'required',
-            'profesor_id'=>'required',
+
             'horario'=>'required',
-            'bandera'
         ]);
+        request()->file->storeAs('uploads', request()->file->getClientOriginalName());
         $leccion->update($data);
         if($leccion->save())
         {
@@ -296,7 +299,7 @@ public function LEccion_show($id)
         return view('mostrar_maestro',compact('maestro'));
     }
 
-    public function Maestro_store(Request $request)
+    public function Maestro_store(CrearMaestro $request)
     {
         $data=request()->validate([
             'nombre'=>'required',
@@ -335,7 +338,9 @@ public function LEccion_show($id)
     }*/
     public function Maestro_editar(Maestro $maestro)
     {
+
         return view('editar_maestro',['maestro'=>$maestro]);
+       //return view('editar_maestro',['maestro'=>response()->json($maestro)]);
     }
     public function Maestro_update(Maestro $maestro)
     {
@@ -370,6 +375,11 @@ public function LEccion_show($id)
        $restore = Maestro::withTrashed()->where('id', '=', $id)->first();
        $restore->restore();
          return redirect()->route('proyecto.Maestro_index');
+    }
+    public function Maestro_json(Maestro $maestro)
+    {
+        $maestro=response()->json($maestro);
+        return $maestro;
     }
 
 }

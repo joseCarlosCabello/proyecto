@@ -59,7 +59,7 @@ Route::get('/maestros/deleted','controlador@Maestro_index_deleted')->name('proye
 Route::get('/alumnos/deleted','controlador@index_deleted')->name('proyecto.index_deleted')->middleware("auth");
 Route::get('/lecciones/deleted','controlador@Leccion_index_deleted')->name('proyecto.Leccion_index_deleted')->middleware("auth");
 Route::get('/lecciones','controlador@Leccion_index')->name('proyecto.Leccion_index');
-
+Route::get('/maestro/json/{maestro}','controlador@Maestro_json')->name('proyecto.Maestro_json')->middleware("auth");
 /**********show */
 Route::get('/maestros/{maestro}','controlador@Maestro_show')
 ->where('maestro','[0-9]+')

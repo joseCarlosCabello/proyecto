@@ -33,8 +33,6 @@
                             @endif
                         </div>
 
-
-
                         <div class="form-group"> <!-- Submit Button -->
                             <button type="submit" class="btn btn-primary">Registrar!</button>
                         </div>
