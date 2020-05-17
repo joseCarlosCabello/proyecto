@@ -16,4 +16,8 @@ class Alumno extends Model
     {
       $this->attributes['nombre'] = strtoupper($value);
     }
+    public function inscripciones()
+    {
+        return $this->belongsToMany(Leccion::class);
+    }
 }

@@ -282,6 +282,7 @@ public function LEccion_show($id)
     public function Maestro_leccion_index($maestro)
     {
         $maestros=Maestro::findOrFail($maestro); //se toman todos los alumnos de la tabla alumno
+       //$maestros= Maestro::with(['leccion'])->get();
         $maestros=$maestros->leccions;
         $titulo='listado de maestros';
         return view('maestros_leccion',compact('titulo','maestros'));//retorna la vista y se "retorna" el titulo y los alumnos
@@ -382,5 +383,18 @@ public function LEccion_show($id)
         $maestro=response()->json($maestro);
         return $maestro;
     }
+
+    public function incscribir($alumno,$leccion)
+    {
+        $alumnos=Alumno::findOrFail($alumno); //se toman todos los alumnos de la tabla alumno
+        $alumnos=$alumnos->leccions;
+        $lecciones=Leccion::findOrFail($leccion); //se toman todos los alumnos de la tabla alumno
+        $lecciones=$lecciones->alumnos;
+        $titulo='listado de maestros';
+        return dd($lecciones);
+        return dd($alumnos);
+        return view('formulario_alumnos_leccion',compact('titulo','lecciones','alumnos'));//retorna la vista y se "retorna" el titulo y los alumnos
+    }
+
 
 }

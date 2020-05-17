@@ -31,8 +31,12 @@ Route::get('/form_maestro',function(){
     return view("formulario_maestros");
 })->name('form_maestro')->middleware("auth");
 
+Route::get('/inscribir',function(){
+    return view("formulario_alumnos_leccion");
+})->name('inscribir')->middleware("auth"); //////eesto mero
 
 
+//Route::get('/inscribir/{leccion}/{alumno}','controlador@incscribir')->name('proyecto.inscribir')->middleware('auth');
 //*********actualizaciones */
 Route::GET('/actualizar_alumno/{alumno}/editar', 'controlador@editar_alumno')->name('proyecto.Editar_alumno')->middleware("auth");
 Route::PATCH('/actualizar_alumno/{alumno}', 'controlador@update_alumno')->name('proyecto.Update_alumno')->middleware("auth");
