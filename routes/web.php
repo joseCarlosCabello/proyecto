@@ -5,6 +5,7 @@ use Illuminate\Auth\Events\Verified;
 use Illuminate\Support\Facades\Route;
 use App\models\Leccion;
 use App\models\Maestro;
+use Barryvdh\DomPDF\Facade as PDF;
 
 Route::get('/', function () {
     return view('welcome');
@@ -35,6 +36,14 @@ Route::get('/inscribir',function(){
     return view("formulario_alumnos_leccion");
 })->name('inscribir')->middleware("auth"); //////eesto mero
 
+
+/*Route::get('download_pdf', function() {
+    $pdf= PDF::loadView('listado_maestros');
+    return $pdf->download();
+
+})->name('download_pdf');*/
+
+Route::get('/maestros/pdf','controlador@Download_pdf')->name('proyecto.Download_pdf')->middleware("auth");
 
 //Route::get('/inscribir/{leccion}/{alumno}','controlador@incscribir')->name('proyecto.inscribir')->middleware('auth');
 //*********actualizaciones */

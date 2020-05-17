@@ -12,6 +12,7 @@ use App\Http\Requests\CrearLeccion;
 use App\Http\Requests\CrearMaestro;
 use Illuminate\Contracts\Validation\Rule;
 use Illuminate\Support\Facades\Auth;
+use Barryvdh\DomPDF\Facade as PDF;
 
 
 class controlador extends Controller
@@ -278,6 +279,13 @@ public function LEccion_show($id)
         $maestros=Maestro::all(); //se toman todos los alumnos de la tabla alumno
         $titulo='listado de maestros';
         return view('listado_maestros',compact('titulo','maestros'));//retorna la vista y se "retorna" el titulo y los alumnos
+    }
+    public function Download_pdf()
+    {$maestros=Maestro::all(); //se toman todos los alumnos de la tabla alumno
+       // $titulo='listado de maestros';
+       // return view('listado_maestros_pdf',compact('titulo','maestros'));
+        $pdf= PDF::loadView('listado_maestros_pdf',compact('maestros'));
+        return $pdf->download();
     }
     public function Maestro_leccion_index($maestro)
     {

@@ -1,4 +1,4 @@
-@extends('layouts.admi')
+@extends('layouts.pdf')
 
 @section('content')
 
@@ -25,17 +25,12 @@
                         <td>{{$maestro->nombre}}</td>
                         <td>{{$maestro->horario}}</td>
                         <td>{{$maestro->horas}}</td>
-                        <td><a href="{{ route('proyecto.Maestro_show',$maestro)}}" class="btn btn-outline-info">Detalle</a></td>
-                        <td><a href="{{ route('proyecto.Maestro_leccion_index',$maestro)}}" class="btn btn-outline-info">Clases</a></td>
-                        <td><a href="{{ route('proyecto.Maestro_json',$maestro)}}" class="btn btn-outline-info">Json</a></td>
+
                     </tr>
                     @endforeach
                 </tbody>
             </table>
-            <p>
 
-            </p>
-        <td><a href="{{ route('proyecto.Download_pdf')}}" class="btn btn-outline-info">Lista en pdf</a></td>
         </div>
     </div>
 </div>
