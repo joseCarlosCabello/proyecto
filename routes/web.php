@@ -32,9 +32,7 @@ Route::get('/form_maestro',function(){
     return view("formulario_maestros");
 })->name('form_maestro')->middleware("auth");
 
-Route::get('/inscribir',function(){
-    return view("formulario_alumnos_leccion");
-})->name('inscribir')->middleware("auth"); //////eesto mero
+
 
 
 /*Route::get('download_pdf', function() {

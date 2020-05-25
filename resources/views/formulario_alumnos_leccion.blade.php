@@ -17,20 +17,27 @@
                         </div>
                         @endif
 
-                        <div class="form-group"> <!-- id_alumno  -->
-                            <label for="id_clase" class="control-label">ID clase</label>
-                            <input type="int" required exist:leccion,id class="form-control" id="id_clase" name="id_clase" placeholder="###"value="{{old('id_clase')}}">
-                            @if ($errors->has('id_clase'))
-                                <p>{{$errors->first('id_clase')}}</p>
-                             @endif
-                        </div>
-                        <div class="form-group"> <!-- id_alumno  -->
-                            <label for="id_alumno" class="control-label">ID alumno</label>
-                            <input type="int" required exist:leccion,id  class="form-control" id="id_alumno" name="id_alumno" placeholder="###"value="{{old('id_alumno')}}">
-                            @if ($errors->has('id_alumno'))
-                                <p>{{$errors->first('id_alumno')}}</p>
-                             @endif
-                        </div>
+                        <div  class="form-group col-xs-4">
+                            <label id="modal_elem" for="id_clase">Leccion</label>
+
+                                <select id="id_clase" name="id_clase" class="form-control">
+
+                                @foreach($leccions as $leccion)
+                                    <option value="{{$leccion->id}}">{{$leccion->nombre}}</option>
+                                 @endforeach
+                                </select>
+                            </div>
+
+                            <div  class="form-group col-xs-4">
+                                <label id="modal_elem" for="id_alumno">Leccion</label>
+
+                                    <select id="id_clase" name="id_clase" class="form-control">
+
+                                    @foreach($alumnos as $alumno)
+                                        <option value="{{$alumno->id}}">{{$alumno->nombre}}</option>
+                                     @endforeach
+                                    </select>
+                                </div>
                         <div class="form-group"> <!-- Submit Button -->
                             <button type="submit" class="btn btn-primary">Registrar!</button>
                         </div>

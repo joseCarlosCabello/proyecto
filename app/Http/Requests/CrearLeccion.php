@@ -26,7 +26,7 @@ class CrearLeccion extends FormRequest
     {
         return [
             "nombre_clase"=>"required|max:255",
-            "maestro_id"=>"required",
+            //"maestro_id"=>"required",
             "horario"=>"required",
         ];
     }
