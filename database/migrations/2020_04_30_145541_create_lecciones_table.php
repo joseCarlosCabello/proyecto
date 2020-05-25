@@ -15,7 +15,7 @@ class CreateLeccionesTable extends Migration
     {
         Schema::create('leccions', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('maestro_id')->unsigned();
+            $table->integer('maestro_id')->unsigned()->nullable();
             $table->string('nombre_clase');
             $table->string('horario');
             $table->string('bandera')->default('default.jpg');
